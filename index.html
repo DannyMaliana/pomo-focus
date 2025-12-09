@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="A premium, simple Pomodoro timer to boost your productivity with Focus, Short Break, and Long Break intervals.">
+  <title>PomoFocus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="app">
+    <div class="container">
+      <div class="glass-panel">
+        <header class="app-header">
+          <h1 class="app-title">PomoFocus</h1>
+          <div class="header-controls">
+            <button id="btn-sound" class="icon-btn" aria-label="Toggle Sound" data-state="off">
+              <!-- Volume Off Icon (Default) -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                <line x1="23" y1="9" x2="17" y2="15" />
+                <line x1="17" y1="9" x2="23" y2="15" />
+              </svg>
+            </button>
+            <button id="btn-settings" class="icon-btn" aria-label="Settings">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.47a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.39a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="modes" role="tablist">
+          <button id="mode-work" class="mode-btn active" role="tab" aria-selected="true" data-mode="work">Focus</button>
+          <button id="mode-short" class="mode-btn" role="tab" aria-selected="false" data-mode="short">Short
+            Break</button>
+          <button id="mode-long" class="mode-btn" role="tab" aria-selected="false" data-mode="long">Long Break</button>
+        </div>
+
+        <div class="timer-display">
+          <div class="timer-circle-bg"></div>
+          <svg class="timer-circle-svg" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" class="time-circle-track"></circle>
+            <circle cx="50" cy="50" r="45" class="time-circle-progress" id="progress-ring"></circle>
+          </svg>
+          <div id="time-display" role="timer">25:00</div>
+          <p id="timer-label">Ready to focus?</p>
+        </div>
+
+        <div class="controls">
+          <button id="btn-toggle" class="control-btn primary">Start</button>
+          <button id="btn-reset" class="control-btn secondary" aria-label="Reset">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12" />
+              <path d="M3 3v9h9" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="task-section">
+          <input type="text" id="task-input" placeholder="What are you working on?" aria-label="Current Task">
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+      <div class="modal-content glass-panel">
+        <div class="modal-header">
+          <h3>Settings</h3>
+          <button id="close-modal" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-group">
+            <label>Timer (minutes)</label>
+            <div class="inputs-row">
+              <div class="input-wrapper">
+                <label for="work-time">Focus</label>
+                <input type="number" id="work-time" value="25" min="1" max="60">
+              </div>
+              <div class="input-wrapper">
+                <label for="short-time">Short Break</label>
+                <input type="number" id="short-time" value="5" min="1" max="60">
+              </div>
+              <div class="input-wrapper">
+                <label for="long-time">Long Break</label>
+                <input type="number" id="long-time" value="15" min="1" max="60">
+              </div>
+            </div>
+          </div>
+
+          <div class="setting-group">
+            <label>Notification Sound</label>
+            <div class="inputs-row">
+              <div class="input-wrapper">
+                <select id="sound-select">
+                  <option value="classic">Classic Beep</option>
+                  <option value="digital">Digital Watch</option>
+                  <option value="chime">Soft Chime</option>
+                  <option value="alarm">Alarm</option>
+                </select>
+              </div>
+              <button id="btn-preview-sound" class="control-btn secondary small" style="width: 40px; height: 40px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <button id="save-settings" class="control-btn primary small">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
