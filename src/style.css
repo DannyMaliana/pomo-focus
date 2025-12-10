@@ -306,8 +306,10 @@ input[type=number] {
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
-  /* Hidden state by default */
+/* Hidden state for Reset button specifically */
+.controls .control-btn.secondary {
   opacity: 0;
   width: 0;
   padding: 0;
