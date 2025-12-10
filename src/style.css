@@ -248,19 +248,28 @@ input[type=number] {
 }
 
 /* Controls */
+/* Controls */
 .controls {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  /* gap: 16px;  Removed to prevent offset when reset hidden */
   margin-top: 8px;
+  height: 64px;
+  /* Fix height to prevent layout shift */
+  transition: gap 0.3s ease;
+}
+
+.controls.running {
+  gap: 16px;
 }
 
 .control-btn {
   font-family: inherit;
   border: none;
   cursor: pointer;
-  transition: transform 0.1s ease, background 0.3s, box-shadow 0.3s;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Bouncy transition */
 }
 
 .control-btn:active {
@@ -278,6 +287,7 @@ input[type=number] {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   min-width: 160px;
+  z-index: 2;
 }
 
 .control-btn.primary:hover {
@@ -294,6 +304,22 @@ input[type=number] {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* Hidden state by default */
+  opacity: 0;
+  width: 0;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+  transform: translateX(-20px);
+}
+
+/* When active, show secondary button */
+.controls.running .control-btn.secondary {
+  opacity: 1;
+  width: 56px;
+  pointer-events: auto;
+  transform: translateX(0);
 }
 
 .control-btn.secondary:hover {
