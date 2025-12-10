@@ -54,6 +54,7 @@ const inputShort = document.getElementById('short-time')
 const inputLong = document.getElementById('long-time')
 const soundSelect = document.getElementById('sound-select')
 const btnPreviewSound = document.getElementById('btn-preview-sound')
+const controlsContainer = document.querySelector('.controls')
 
 // Constants
 const FULL_DASH_ARRAY = 283
@@ -311,6 +312,7 @@ function setMode(mode) {
   timeLeft = totalTime
 
   stopNoise()
+  controlsContainer.classList.remove('running')
 
   modeBtns.forEach(btn => {
     btn.classList.toggle('active', btn.dataset.mode === mode)
@@ -345,6 +347,7 @@ function startTimer() {
   isRunning = true
   btnToggle.textContent = 'Pause'
   btnToggle.classList.add('active')
+  controlsContainer.classList.add('running')
 
   if (soundEnabled) startNoise()
 
@@ -370,6 +373,7 @@ function resetTimer() {
   pauseTimer()
   timeLeft = totalTime
   updateDisplay()
+  controlsContainer.classList.remove('running')
 }
 
 function completeTimer() {
@@ -377,6 +381,7 @@ function completeTimer() {
   timeLeft = 0
   updateDisplay()
   playNotificationSound()
+  controlsContainer.classList.remove('running')
   timerLabel.textContent = 'Time is up!'
 }
 

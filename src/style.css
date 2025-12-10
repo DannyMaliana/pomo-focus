@@ -370,8 +370,10 @@ input[type=number] {
 /* Modal */
 .modal {
   position: fixed;
-  inset: 0;
-  /* Modern full-screen positioning */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(4px);
   display: flex;
@@ -381,8 +383,6 @@ input[type=number] {
   opacity: 1;
   visibility: visible;
   transition: opacity 0.3s, visibility 0.3s;
-  padding: 16px;
-  /* Ensure edge spacing on very small screens */
 }
 
 .modal.hidden {
@@ -392,20 +392,12 @@ input[type=number] {
 }
 
 .modal-content {
-  width: 100%;
+  width: 90%;
   max-width: 400px;
   background: #1e293b;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
   padding: 32px;
-  display: flex;
-  /* Ensure these are flex for gap to work */
-  flex-direction: column;
   gap: 24px;
-  margin: auto;
-  /* Robust centering fallback */
-  position: relative;
-  /* Context */
 }
 
 .modal-header {
