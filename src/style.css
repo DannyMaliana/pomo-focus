@@ -109,12 +109,14 @@ body[data-mode="long"]::before {
 /* Position buttons explicitly for balance */
 #btn-sound {
   position: absolute;
-  left: 0;
+  left: 8px;
+  /* Pulled in from edge */
 }
 
 #btn-settings {
   position: absolute;
-  right: 0;
+  right: 8px;
+  /* Pulled in from edge */
 }
 
 .app-title {
@@ -141,11 +143,15 @@ input[type=number] {
 
 /* Icon Buttons (Settings, Sound) */
 .icon-btn {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.05);
+  /* Added background */
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 8px;
+  padding: 0;
+  width: 40px;
+  /* Fixed size */
+  height: 40px;
   border-radius: 50%;
   transition: all 0.2s;
   display: flex;
@@ -154,7 +160,8 @@ input[type=number] {
 }
 
 .icon-btn:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
+  /* Brighter hover */
   color: var(--text-main);
 }
 
